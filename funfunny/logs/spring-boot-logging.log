@@ -1,0 +1,9 @@
+2020-01-16 11:49:26.379  INFO 23340 --- [main] com.funfunny.FunfunnyApplication         : Starting FunfunnyApplication on DESKTOP-FENH1E1 with PID 23340 (D:\kym\git\funfunny\funfunny\target\classes started by komin in D:\kym\git\funfunny\funfunny)
+2020-01-16 11:49:26.384  INFO 23340 --- [main] com.funfunny.FunfunnyApplication         : No active profile set, falling back to default profiles: default
+2020-01-16 11:49:29.521  INFO 23340 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-01-16 11:49:29.522  INFO 23340 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.29]
+2020-01-16 11:49:29.671  INFO 23340 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-01-16 11:49:30.287  INFO 23340 --- [main] com.funfunny.FunfunnyApplication         : Started FunfunnyApplication in 4.432 seconds (JVM running for 4.971)
+2020-01-16 11:49:35.307  INFO 23340 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-01-16 11:49:35.390  INFO 23340 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-01-16 11:49:35.503  INFO 23340 --- [http-nio-8080-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.

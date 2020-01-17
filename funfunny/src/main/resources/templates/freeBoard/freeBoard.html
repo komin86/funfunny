@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<body>
+		<div class="w3-container">
+			<div style="width: 70%; margin-bottom: 1em">
+			<h1>자유 게시판</h1>
+				<div>
+					<ul class="w3-ul w3-card-4" >
+						<li th:each="list , iStat : ${FreeBoardPage.content}" 
+							class="w3-bar w3-hover-green">
+							<div class="w3-bar-item">
+								<span th:text="${#temporals.format(list.reg_date,'yyy-MM-dd HH:mm:ss')}"></span><br>
+								<span th:text="${list.title}"></span>
+							</div>
+						</li>
+					</ul>
+				</div>    
+			</div>
+			
+	    	<div th:if="${FreeBoardPage.totalPages > 0}" class="w3-bar">
+				<a	th:each="pageNumber : ${pageNumbers}"
+					th:href="@{/freeBoard(size=${FreeBoardPage.size}, page=${pageNumber})}"
+	         		th:text=${pageNumber} 
+	         		th:class="${pageNumber==FreeBoardPage.number + 1} ? 'w3-button w3-green' : 'w3-button'"></a>
+	    	</div>
+			
+		</div>
+	</body>
+</html>
