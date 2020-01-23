@@ -12,7 +12,7 @@ import com.funfunny.freeBoard.bean.FreeBoard;
 public interface FreeBoradMapper {
 
 	@Select("SELECT "
-			+ "NAME, REG_DATE, GOOD_CNT, BAD_CNT, TITLE, CLICK_CNT "
+			+ "NO, NAME, REG_DATE, GOOD_CNT, BAD_CNT, TITLE, CLICK_CNT "
 			+ "FROM "
 			+ "funfunny.TB_FREE_BOARD "
 			+ "LIMIT #{pageSize} OFFSET #{currentPage}")
@@ -20,4 +20,7 @@ public interface FreeBoradMapper {
 
 	@Select("SELECT COUNT(*) FROM funfunny.TB_FREE_BOARD")
 	int totalCnt();
+	
+	@Select("SELECT * FROM funfunny.TB_FREE_BOARD WHERE NO= #{no}")
+	FreeBoard getdata(@Param("no")int no);
 }

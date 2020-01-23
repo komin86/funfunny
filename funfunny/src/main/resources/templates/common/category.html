@@ -1,16 +1,13 @@
-
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="css/common/w3.css">
-</head>
-<body>
-	<header class="w3-container">
-<!-- 		<div style=" margin-bottom: 1em">
-		
-		</div> -->
-		
-	<div class="w3-container w3-green w3-cell">
-		<p>Hello W3.CSS Layout.</p>
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="category" th:class="category">
+	<div th:class="'w3-cell-row w3-card-2'" th:style="'height: 3em'">
+		<a th:href="@{/freeBoard}" class="w3-container w3-green w3-cell w3-center w3-button">
+			재미 
+		</a>
+		<a th:href="@{/freeBoard}" class="w3-container w3-deep-orange w3-cell w3-center w3-button">
+			음식
+		</a>
+		<a th:href="@{/freeBoard}" class="w3-container w3-blue w3-cell w3-center w3-button">
+			여행
+		</a>
 	</div>
-	</header>
-</body>
+</div>

@@ -36,7 +36,7 @@ public class FreeBoardController {
 	public String freeBoard(@RequestParam("page") Optional<Integer> page, 
 		      @RequestParam("size") Optional<Integer> size, Model model) {
 		int currentPage = page.orElse(1);
-        int pageSize = size.orElse(1);
+        int pageSize = size.orElse(5);
       
         Pageable pageable = PageRequest.of(currentPage -1, pageSize);
         
@@ -53,5 +53,15 @@ public class FreeBoardController {
         }
 
 		return "freeBoard/freeBoard";
+	}
+	
+	
+	@GetMapping("/freeBoardDetail")
+	public String freeBoardDetail(@RequestParam("no") int no, Model model) {
+
+		FreeBoard board = boradMapper.getdata(no);
+		model.addAttribute("data", board);
+		
+		return "freeBoard/freeBoardDetail";
 	}
 }
