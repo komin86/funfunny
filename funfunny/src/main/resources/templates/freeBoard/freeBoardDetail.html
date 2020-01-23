@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/common/w3.css">
+<link rel="stylesheet" href="css/common/common.css">
+<link rel="stylesheet" href="css/common/summernote.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="js/common/summernote.min.js"></script>
+<script src="js/common/common.js"></script>
+<title>자유글</title>
+</head>
+	<body>
+		<div th:class="w3-container">
+			<div th:insert="~{common/category :: category}"></div>
+			<div th:text="수정" th:class="'modifyB w3-button  w3-blue w3-card'" th:onclick="hideAndShow('.view','.modify')"></div>
+			<div th:class="contentWrap">
+				<article th:class="view">
+					<div th:class="'w3-bar w3-card headerContents'">
+						  <img src="" th:class="'w3-bar-item w3-circle imgW85'">
+						  <div th:class="w3-bar-item">
+						    <span th:class="w3-large" th:text="${data.name}"></span><br>
+						    <span th:text="${data.title}"></span>
+						  </div>
+					</div>
+					<div th:text="${data.contents}" th:class="'contents w3-card'">
+					
+					</div>
+				</article>
+				<article th:class="'modify hide'">
+					<form action="">
+						<input th:class="w3-input" th:text="${data.name}" th:name="name"></input>
+						<input th:class="w3-input" th:text="${data.title}" th:name="title"></input>
+						<textarea th:id="summernote" th:name="${data.contents}" rows="" cols="" ></textarea>
+					</form>
+				
+				</article>
+			</div>
+		</div>
+	</body>	
+</html>
