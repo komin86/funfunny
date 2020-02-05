@@ -4,36 +4,45 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/common/w3.css">
 <link rel="stylesheet" href="css/common/common.css">
-<link rel="stylesheet" href="css/common/summernote.min.css">
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="js/common/summernote.min.js"></script>
 <script src="js/common/common.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
 <title>자유글</title>
 </head>
 	<body>
 		<div th:class="w3-container">
 			<div th:insert="~{common/category :: category}"></div>
-			<div th:text="수정" th:class="'modifyB w3-button  w3-blue w3-card'" th:onclick="hideAndShow('.view','.modify')"></div>
+			<div th:text="수정" th:class="'w3-button w3-blue w3-card'" th:onclick="elementChange(this,'.view',['.modifyContent','.update'])"></div>
+			<div th:text="저장" th:class="'w3-button w3-blue w3-card update hide'" th:onclick="document.forms[0].submit()"></div>
 			<div th:class="contentWrap">
 				<article th:class="view">
-					<div th:class="'w3-bar w3-card headerContents'">
+					<div th:class="'w3-bar w3-card marginTop'">
 						  <img src="" th:class="'w3-bar-item w3-circle imgW85'">
 						  <div th:class="w3-bar-item">
 						    <span th:class="w3-large" th:text="${data.name}"></span><br>
 						    <span th:text="${data.title}"></span>
 						  </div>
 					</div>
-					<div th:text="${data.contents}" th:class="'contents w3-card'">
+					<div th:text="${data.contents}" th:class="'contents w3-card marginTop'">
 					
 					</div>
 				</article>
-				<article th:class="'modify hide'">
-					<form action="">
-						<input th:class="w3-input" th:text="${data.name}" th:name="name"></input>
-						<input th:class="w3-input" th:text="${data.title}" th:name="title"></input>
-						<textarea th:id="summernote" th:name="${data.contents}" rows="" cols="" ></textarea>
+				<article th:class="'modifyContent hide'">
+					<form action="/freeBoardUpdate" th:method="post" th:class="'w3-container contents w3-card marginTop'">
+						<input th:value="${data.no}" th:name="no" th:type="hidden">
+						<input th:class="'w3-input marginTop'" th:value="${data.name}" th:name="name">
+						<input th:class="'w3-input marginColumn'" th:value="${data.title}" th:name="title">
+						<textarea th:class="marginTop" th:id="editor" th:name="contents"></textarea>
+						<script>
+						    ClassicEditor
+						        .create( document.querySelector( '#editor' ) )
+					        	.then( newEditor => {
+									editor = newEditor;
+							   	} )
+						        .catch( error => {
+						        	  console.error( error );
+						        } );
+						</script>
 					</form>
-				
 				</article>
 			</div>
 		</div>

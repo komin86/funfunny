@@ -1,7 +1,10 @@
-.imgW85 { width:85px; }
+body {font-size: 1.2em;}
+
 .hide { display : none; }
 .category { margin: 1em 0em; }
 .contentWrap { width: 70%; margin-bottom: 1em; }
-.contents { padding: 2em; }
-.headerContents { margin: 1em 0em;}
+.contents { padding: 1.5em; }
+.marginColumn { margin: 1em 0em;}
+.marginTop { margin: 1em 0em 0em 0em;}
+.marginBottom { margin: 0em 1em 0em 0em;}
 .curPinter{ cursor: pointer; }
