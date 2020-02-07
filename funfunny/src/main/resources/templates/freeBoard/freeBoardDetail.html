@@ -12,7 +12,7 @@
 		<div th:class="w3-container">
 			<div th:insert="~{common/category :: category}"></div>
 			<div th:text="수정" th:class="'w3-button w3-blue w3-card'" th:onclick="elementChange(this,'.view',['.modifyContent','.update'])"></div>
-			<div th:text="저장" th:class="'w3-button w3-blue w3-card update hide'" th:onclick="document.forms[0].submit()"></div>
+			<div th:text="저장" th:class="'w3-button w3-blue w3-card update hide'" th:onclick="document.forms[1].submit()"></div>
 			<div th:class="contentWrap">
 				<article th:class="view">
 					<div th:class="'w3-bar w3-card marginTop'">
@@ -22,8 +22,8 @@
 						    <span th:text="${data.title}"></span>
 						  </div>
 					</div>
-					<div th:text="${data.contents}" th:class="'contents w3-card marginTop'">
-					
+					<div th:class="'contents w3-card marginTop'">
+						<div th:id="readOnly" th:utext="${data.contents}"></div>
 					</div>
 				</article>
 				<article th:class="'modifyContent hide'">
@@ -31,16 +31,32 @@
 						<input th:value="${data.no}" th:name="no" th:type="hidden">
 						<input th:class="'w3-input marginTop'" th:value="${data.name}" th:name="name">
 						<input th:class="'w3-input marginColumn'" th:value="${data.title}" th:name="title">
-						<textarea th:class="marginTop" th:id="editor" th:name="contents"></textarea>
+						<textarea th:class="marginTop" th:id="editor" th:name="contents"th:utext="${data.contents}"></textarea>
 						<script>
 						    ClassicEditor
 						        .create( document.querySelector( '#editor' ) )
 					        	.then( newEditor => {
 									editor = newEditor;
 							   	} )
+							   	
 						        .catch( error => {
 						        	  console.error( error );
 						        } );
+						    
+						    ClassicEditor
+						        .create( document.querySelector( '#readOnly' ) )
+					        	.then( newEditor => {
+									editor = newEditor;
+									editor.isReadOnly = true;
+							   	} )
+						        .catch( error => {
+						        	  console.error( error );
+						        } );
+						    
+						    if(  [[${param.msg} ? true : false]] ) {
+						    	alert("업데이트 실패")
+						    }
+			
 						</script>
 					</form>
 				</article>

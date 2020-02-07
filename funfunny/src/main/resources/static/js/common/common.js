@@ -26,4 +26,4 @@ function displayToggle(){
 	
 }
 
-console.log(document.forms);
+

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.funfunny.common.paging.PagingService;
 import com.funfunny.freeBoard.bean.FreeBoard;
@@ -53,7 +54,7 @@ public class FreeBoardController {
 	
 	
 	@GetMapping("/freeBoardDetail" )
-	public String freeBoardDetail(@RequestParam("no") int no, Model model) {
+	public String freeBoardDetail(@RequestParam int no, Model model) {
 
 		FreeBoard board = boradMapper.getdata(no);
 		model.addAttribute("data", board);
@@ -64,8 +65,9 @@ public class FreeBoardController {
 	@PostMapping( "/freeBoardUpdate")
 	public String freeBoardUpdate(FreeBoard board) {
 		
-		//boradMapper.update(board);
+		int no = board.getNo();
+		int result = boradMapper.update(board);
 
-		return "freeBoard/freeBoardDetail";
+		return result == 1 ? "redirect:/freeBoardDetail?no="+no : "redirect:/freeBoardDetail?no="+no+"&msg=0";
 	}
 }

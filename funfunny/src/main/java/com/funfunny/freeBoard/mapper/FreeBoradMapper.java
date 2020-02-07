@@ -25,7 +25,7 @@ public interface FreeBoradMapper {
 	@Select("SELECT * FROM funfunny.TB_FREE_BOARD WHERE NO= #{no}")
 	FreeBoard getdata(@Param("no")int no);
 	
-	@Update("UPDATE funfunny.TB_FREE_BOARD SET TITLE=#{title}, NAME=#{name}, CONTENTS=#{contentes}"
+	@Update("UPDATE funfunny.TB_FREE_BOARD SET TITLE=#{title}, NAME=#{name}, CONTENTS=#{contents}"
 			+ "WHERE NO=#{no}")
-	void update(FreeBoard board);
+	int update(FreeBoard board);
 }
