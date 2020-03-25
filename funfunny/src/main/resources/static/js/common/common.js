@@ -26,4 +26,28 @@ function displayToggle(){
 	
 }
 
-
+function summernoteSendFile(file){
+	var data = new FormData();
+	data.append("image",file);
+	$.ajax({
+		url: "/freeBoardImage",
+		data: data,
+		cache: false,
+		contentType: false,
+		processData: false,
+		type: "post",
+		success: function(url){
+			console.log(url);
+			if(url == "FNF"){
+				alert("이미지 저장 실패 (파일누락)");
+			} else if(url == "FSF"){
+				alert("이미지 저장 실패 (서버복사)");
+			} else {
+				$('#summernote').summernote("insertImage", url , "테스트111");
+			}
+		},
+		error: function(err){
+			console.log(err);
+		}
+	});
+};

@@ -2,6 +2,8 @@ package com.funfunny.freeBoard.controller;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,10 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.funfunny.common.fileUpload.FileUploadService;
 import com.funfunny.common.paging.PagingService;
 import com.funfunny.freeBoard.bean.FreeBoard;
 import com.funfunny.freeBoard.mapper.FreeBoradMapper;
+
 
 @Controller
 public class FreeBoardController {
@@ -27,6 +33,9 @@ public class FreeBoardController {
 	
 	@Autowired
 	private PagingService pagingService;
+	
+	@Autowired
+	private FileUploadService fileUploadService;
 	
 	@GetMapping("/freeBoard")
 	@SuppressWarnings("unchecked")
@@ -55,7 +64,7 @@ public class FreeBoardController {
 	
 	@GetMapping("/freeBoardDetail" )
 	public String freeBoardDetail(@RequestParam int no, Model model) {
-
+		
 		FreeBoard board = boradMapper.getdata(no);
 		model.addAttribute("data", board);
 		
@@ -63,11 +72,32 @@ public class FreeBoardController {
 	}
 	
 	@PostMapping( "/freeBoardUpdate")
-	public String freeBoardUpdate(FreeBoard board) {
+	public String freeBoardUpdate(@RequestParam("image") MultipartFile file, FreeBoard board) {
 		
+		
+		System.out.println(file.isEmpty());
+		System.out.println(file);
+		System.out.println(board.getContents());
 		int no = board.getNo();
 		int result = boradMapper.update(board);
 
 		return result == 1 ? "redirect:/freeBoardDetail?no="+no : "redirect:/freeBoardDetail?no="+no+"&msg=0";
+	}
+	
+	
+	@PostMapping("/freeBoardImage")
+	public @ResponseBody String freeBoardImage(@RequestParam("image") MultipartFile file,
+			RedirectAttributes redirectAttributes) {
+		
+		
+		if(file.isEmpty()) {
+			System.out.println("fileName errr " );
+			redirectAttributes.addFlashAttribute("err", "FNF");
+			return "redirect:/freeBoardImage";
+		}
+
+		String fileName = fileUploadService.fileUp(file, FileUploadService.freeBoradTempStoragePath);
+
+		return fileName;
 	}
 }

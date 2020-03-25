@@ -8,3 +8,6 @@ body {font-size: 1.2em;}
 .marginTop { margin: 1em 0em 0em 0em;}
 .marginBottom { margin: 0em 1em 0em 0em;}
 .curPinter{ cursor: pointer; }
+
+.table-bordered{ width: 100%; border-collapse: collapse; }
+.table-bordered td { border: 1px solid #a0a0a0; padding: 5px 3px; }

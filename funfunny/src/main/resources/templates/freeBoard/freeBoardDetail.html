@@ -4,15 +4,19 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/common/w3.css">
 <link rel="stylesheet" href="css/common/common.css">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.css" rel="stylesheet">
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="js/common/common.js"></script>
-<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-lite.min.js"></script>
+
 <title>자유글</title>
 </head>
 	<body>
 		<div th:class="w3-container">
 			<div th:insert="~{common/category :: category}"></div>
 			<div th:text="수정" th:class="'w3-button w3-blue w3-card'" th:onclick="elementChange(this,'.view',['.modifyContent','.update'])"></div>
-			<div th:text="저장" th:class="'w3-button w3-blue w3-card update hide'" th:onclick="document.forms[1].submit()"></div>
+			<div th:text="저장" th:class="'w3-button w3-blue w3-card update hide'" th:onclick="document.forms[0].submit()"></div>
 			<div th:class="contentWrap">
 				<article th:class="view">
 					<div th:class="'w3-bar w3-card marginTop'">
@@ -23,40 +27,23 @@
 						  </div>
 					</div>
 					<div th:class="'contents w3-card marginTop'">
-						<div th:id="readOnly" th:utext="${data.contents}"></div>
+						<div th:class="summernote" th:utext="${data.contents}"></div>
 					</div>
 				</article>
 				<article th:class="'modifyContent hide'">
 					<form action="/freeBoardUpdate" th:method="post" th:class="'w3-container contents w3-card marginTop'">
 						<input th:value="${data.no}" th:name="no" th:type="hidden">
-						<input th:class="'w3-input marginTop'" th:value="${data.name}" th:name="name">
+						<div th:class="' marginTop'" th:text="${data.name}"></div>
 						<input th:class="'w3-input marginColumn'" th:value="${data.title}" th:name="title">
-						<textarea th:class="marginTop" th:id="editor" th:name="contents"th:utext="${data.contents}"></textarea>
+						<textarea th:class="marginTop" th:id="summernote" th:name="contents"th:utext="${data.contents}"></textarea>
 						<script>
-						    ClassicEditor
-						        .create( document.querySelector( '#editor' ) )
-					        	.then( newEditor => {
-									editor = newEditor;
-							   	} )
-							   	
-						        .catch( error => {
-						        	  console.error( error );
-						        } );
-						    
-						    ClassicEditor
-						        .create( document.querySelector( '#readOnly' ) )
-					        	.then( newEditor => {
-									editor = newEditor;
-									editor.isReadOnly = true;
-							   	} )
-						        .catch( error => {
-						        	  console.error( error );
-						        } );
-						    
-						    if(  [[${param.msg} ? true : false]] ) {
-						    	alert("업데이트 실패")
+						  $('#summernote').summernote({
+						  	callbacks: {
+								onImageUpload: function(image) {
+									summernoteSendFile(image[0]);
+						        }
 						    }
-			
+						  });
 						</script>
 					</form>
 				</article>
