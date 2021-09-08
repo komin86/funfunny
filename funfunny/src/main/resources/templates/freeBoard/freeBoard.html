@@ -7,17 +7,18 @@
 <title>자유목록</title>
 </head>
 	<body>
-		<div th:class="w3-container">
+		<div th:class="w3-container" >
 			<div th:insert="~{common/category :: category}"></div>
 			<div th:class="contentWrap">
 				<h1>자유 게시판</h1>
-				<div>
+				<div th:class="textRight"><div th:class="'w3-button w3-green w3-card'" th:onclick="|location='@{/freeBoardNew}'|">새 글</div></div>
+				<div th:class="marginTop">
 					<ul th:class="'w3-ul w3-card'" >
 						<li th:each="list , iStat : ${FreeBoardPage.content}" 
 							th:class="'w3-bar w3-hover-green curPinter'" th:onclick="|location='@{/freeBoardDetail(no=${list.no})}'|">
 							<div th:class="w3-bar-item">
-								<span th:text="${#temporals.format(list.reg_date,'yyy-MM-dd HH:mm:ss')}"></span><br>
-								<span th:text="${list.title}"></span>
+								<span th:text="${#dates.format(list.reg_date,'yyy-MM-dd HH:mm:ss')}"></span><br>
+								<span th:text="${list.title}" ></span>
 							</div>
 						</li>
 					</ul>

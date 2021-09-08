@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class FreeBoardReply {
 	
 	private int no;
-	private String name;
+	private String id;
 	private String ip;
 	private LocalDateTime reg_date;
 	private LocalDateTime mod_date;
@@ -17,11 +17,11 @@ public class FreeBoardReply {
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public String getName() {
-		return name;
+	public String getId() {
+		return id;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getIp() {
 		return ip;

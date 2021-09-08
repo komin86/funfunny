@@ -11,22 +11,11 @@ function elementChange() {
 }
 
 function displayToggle(){
-
-	if(typeof arguments[0] === 'string' ) {
-		document.querySelector(arguments[0]).classList.add("hide");
-	} else {
-		arguments[0].forEach( el => document.querySelector(el).classList.add("hide") );
-	}
-
-	if(typeof arguments[1] === 'string' ) {
-		document.querySelector(arguments[1]).classList.remove("hide");
-	} else {
-		arguments[1].forEach( el => document.querySelector(el).classList.remove("hide") );
-	}
-	
+	arguments[0].forEach( el => document.querySelector(el).classList.add("hide") );
+	arguments[1].forEach( el => document.querySelector(el).classList.remove("hide") );
 }
 
-function summernoteSendFile(file){
+function summernoteSendFile(file , target){
 	var data = new FormData();
 	data.append("image",file);
 	$.ajax({
@@ -36,14 +25,15 @@ function summernoteSendFile(file){
 		contentType: false,
 		processData: false,
 		type: "post",
-		success: function(url){
-			console.log(url);
-			if(url == "FNF"){
+		success: function(data){
+			console.log(data);
+			console.log(target);
+			if(data.status == "FNF"){
 				alert("이미지 저장 실패 (파일누락)");
-			} else if(url == "FSF"){
+			} else if(data.status == "FSF"){
 				alert("이미지 저장 실패 (서버복사)");
 			} else {
-				$('#summernote').summernote("insertImage", url , "테스트111");
+				$(target).summernote("insertImage", data.url+data.name , data.name);
 			}
 		},
 		error: function(err){

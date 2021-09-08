@@ -11,3 +11,20 @@ body {font-size: 1.2em;}
 
 .table-bordered{ width: 100%; border-collapse: collapse; }
 .table-bordered td { border: 1px solid #a0a0a0; padding: 5px 3px; }
+
+.note-editor{ margin-top: 8px; }
+
+.textRight{text-align: right; margin: 5px 0px;}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  outline: none;
+}
+
+input[type=text]:focus {
+  border: 3px solid #555;
+}

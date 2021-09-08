@@ -5,7 +5,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.funfunny.common.fileUpload.FileUploadService;
+import com.funfunny.freeBoard.controller.FreeBoardController;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer{
@@ -19,7 +19,8 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/freeBorad/image/**").addResourceLocations("file:"+FileUploadService.freeBoradTempStoragePath);
+		registry.addResourceHandler("/image/freeBoard/**")
+			.addResourceLocations("file:"+FreeBoardController.freeBoradStoragePath , "file:"+ FreeBoardController.tempFreeBoradStoragePath);
 		WebMvcConfigurer.super.addResourceHandlers(registry);
 	}
 	

@@ -15,38 +15,39 @@
 	<body>
 		<div th:class="w3-container">
 			<div th:insert="~{common/category :: category}"></div>
-			<div th:text="수정" th:class="'w3-button w3-blue w3-card'" th:onclick="elementChange(this,'.view',['.modifyContent','.update'])"></div>
+			<div th:text="수정" th:class="'w3-button w3-blue w3-card'" th:onclick="elementChange(this,['.view','.delete'],['.modifyContent','.update'])"></div>
+			<div th:text="삭제" th:class="'w3-button w3-blue w3-card delete'" th:onclick=""></div>
 			<div th:text="저장" th:class="'w3-button w3-blue w3-card update hide'" th:onclick="document.forms[0].submit()"></div>
 			<div th:class="contentWrap">
-				<article th:class="view">
+				<div th:class="view">
 					<div th:class="'w3-bar w3-card marginTop'">
 						  <img src="" th:class="'w3-bar-item w3-circle imgW85'">
 						  <div th:class="w3-bar-item">
-						    <span th:class="w3-large" th:text="${data.name}"></span><br>
+						    <span th:class="w3-large" th:text="${data.id}"></span><br>
 						    <span th:text="${data.title}"></span>
 						  </div>
 					</div>
 					<div th:class="'contents w3-card marginTop'">
 						<div th:class="summernote" th:utext="${data.contents}"></div>
 					</div>
-				</article>
-				<article th:class="'modifyContent hide'">
+				</div>
+				<div th:class="'modifyContent hide'">
 					<form action="/freeBoardUpdate" th:method="post" th:class="'w3-container contents w3-card marginTop'">
 						<input th:value="${data.no}" th:name="no" th:type="hidden">
-						<div th:class="' marginTop'" th:text="${data.name}"></div>
+						<div th:class="' marginTop'" th:text="${data.id}"></div>
 						<input th:class="'w3-input marginColumn'" th:value="${data.title}" th:name="title">
 						<textarea th:class="marginTop" th:id="summernote" th:name="contents"th:utext="${data.contents}"></textarea>
 						<script>
-						  $('#summernote').summernote({
-						  	callbacks: {
-								onImageUpload: function(image) {
-									summernoteSendFile(image[0]);
-						        }
-						    }
-						  });
+							$('#summernote').summernote({
+								callbacks: {
+									onImageUpload: function(image,$editable) {
+										summernoteSendFile(image[0] , this);
+							    	}
+								} 
+						 	}) 
 						</script>
 					</form>
-				</article>
+				</div>
 			</div>
 		</div>
 	</body>	
