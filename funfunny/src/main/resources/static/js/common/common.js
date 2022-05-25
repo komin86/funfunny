@@ -40,4 +40,16 @@ function summernoteSendFile(file , target){
 			console.log(err);
 		}
 	});
-};
+}
+
+function formSubmit(target, path ,type){
+	console.log(target);
+	console.log(path);
+	console.log(type);
+	target.action = path;
+	target.method = type;
+	
+	console.log(target);
+	//target.submit();
+	
+}

@@ -56,14 +56,19 @@ public class FileUploadService {
 	public String fileCopy(String tempPath, String realPath , String filename)  {
 		
 		File temp = new File(tempPath+filename);
-		File real = new File(realPath+filename);
+		File real = new File(realPath);
+		if(!real.exists()) { real.mkdir(); }
+		
+		File realTarget = new File(realPath+filename);
+		
 		FileInputStream stream;
 		String result = "";
+		
 		try {
 			//실사용 경로 확인
-			if(!real.exists()) {
+			if(!realTarget.exists()) {
 				stream = new FileInputStream(temp);
-				FileCopyUtils.copy(stream.readAllBytes(), real);
+				FileCopyUtils.copy(stream.readAllBytes(), realTarget);
 				stream.close();
 				result = "SU";
 			}

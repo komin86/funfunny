@@ -16,9 +16,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -38,8 +40,8 @@ public class FreeBoardController {
 
 	
 	public static final String freeBoradUrlPath = "image/freeBoard/";
-	public static final String freeBoradStoragePath = "D:/image/freeBoard/";
-	public static final String tempFreeBoradStoragePath = "D:/image/tempFreeBoard/";
+	public static final String freeBoradStoragePath = "C:/image/freeBoard/";
+	public static final String tempFreeBoradStoragePath = "C:/image/tempFreeBoard/";
 	
 	@Autowired
 	private FreeBoradMapper boradMapper;
@@ -82,7 +84,7 @@ public class FreeBoardController {
 		return "freeBoard/freeBoardDetail";
 	}
 	
-	@PostMapping( "/freeBoardUpdate")
+	@PutMapping("/freeBoardUpdate")
 	public String freeBoardUpdate(FreeBoard freeBoard) {
 
 		System.out.println(freeBoard.getContents());
@@ -152,6 +154,14 @@ public class FreeBoardController {
 		} 
 		
 		return "redirect:/freeBoard";
+	}
+	
+	
+	@DeleteMapping("freeBoradDelete")
+	public void freeBoradDelete() {
+		
+		
+		
 	}
 	
 	public static void main(String[] args) {
